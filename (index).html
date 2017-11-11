@@ -28,7 +28,7 @@
     ga('create', 'UA-4573307-8', 'auto');
     ga('send', 'pageview');
   </script>
-  <title>TripSit DXM Calculator Tool</title>
+  <title>TripSit benzo Calculator Tool</title>
 </head>
 
 <body>
@@ -58,96 +58,10 @@
                <br>
           <h3>
             I have <input type="text" name="dose" value="0" size="8" onchange="calculate()" class="form-control"> mg of
-              <select name="inputSubstance" class="form-control">
-              <option value="0.5">alprazolam</option>
-              <option value="1">ativan</option>
-              <option value="5.5">bromazepam</option>
-              <option value="15">centrax</option>
-              <option value="20">clobazam</option>
-              <option value="0.5">clonazepam</option>
-              <option value="15">clorazepate</option>
-              <option value="23">dalmane</option>
-              <option value="10">diazepam</option>
-              <option value="20">doral</option>
-              <option value="1.5">dormonoct</option>
-              <option value="1.5">estazolam</option>
-              <option value="1">etizolam</option>
-              <option value="1">flunitrazepam</option>
-              <option value="23">flurazepam</option>
-              <option value="20">halazepam</option>
-              <option value="0.5">halcion</option>
-              <option value="23">ketazolam</option>
-              <option value="0.5">klonopin</option>
-              <option value="5.5">lexotan</option>
-              <option value="25">librium</option>
-              <option value="1.5">loprazolam</option>
-              <option value="1">lorazepam</option>
-              <option value="1.5">lormetazepam</option>
-              <option value="10">medazepam</option>
-              <option value="10">mogadon</option>
-              <option value="10">nitrazepam</option>
-              <option value="1.5">noctamid</option>
-              <option value="10">nordazepam</option>
-              <option value="1.5">nuctalon</option>
-              <option value="20">oxazepam</option>
-              <option value="20">paxipam</option>
-              <option value="15">prazepam</option>
-              <option value="1.5">proSom</option>
-              <option value="20">quazepam</option>
-              <option value="20">restoril</option>
-              <option value="1">rohypnol</option>
-              <option value="20">serax</option>
-              <option value="20">temazepam</option>
-              <option value="0.5">triazolam</option>
-              <option value="10">valium</option>
-              <option value="0.5">xanax</option>
-            </select>
+            <select name="inputSubstance" class="form-control" id="inputsubstance"> </select>
              and I want to know how much
 
-            <select name="outputSubstance" class="form-control" onchange="calculate()" id="substanceType">
-            <option value="0.5">alprazolam</option>
-            <option value="1">ativan</option>
-            <option value="5.5">bromazepam</option>
-            <option value="15">centrax</option>
-            <option value="20">clobazam</option>
-            <option value="0.5">clonazepam</option>
-            <option value="15">clorazepate</option>
-            <option value="23">dalmane</option>
-            <option value="10">diazepam</option>
-            <option value="20">doral</option>
-            <option value="1.5">dormonoct</option>
-            <option value="1.5">estazolam</option>
-            <option value="1">etizolam</option>
-            <option value="1">flunitrazepam</option>
-            <option value="23">flurazepam</option>
-            <option value="20">halazepam</option>
-            <option value="0.5">halcion</option>
-            <option value="23">ketazolam</option>
-            <option value="0.5">klonopin</option>
-            <option value="5.5">lexotan</option>
-            <option value="25">librium</option>
-            <option value="1.5">loprazolam</option>
-            <option value="1">lorazepam</option>
-            <option value="1.5">lormetazepam</option>
-            <option value="10">medazepam</option>
-            <option value="10">mogadon</option>
-            <option value="10">nitrazepam</option>
-            <option value="1.5">noctamid</option>
-            <option value="10">nordazepam</option>
-            <option value="1.5">nuctalon</option>
-            <option value="20">oxazepam</option>
-            <option value="20">paxipam</option>
-            <option value="15">prazepam</option>
-            <option value="1.5">proSom</option>
-            <option value="20">quazepam</option>
-            <option value="20">restoril</option>
-            <option value="1">rohypnol</option>
-            <option value="20">serax</option>
-            <option value="20">temazepam</option>
-            <option value="0.5">triazolam</option>
-            <option value="10">valium</option>
-            <option value="0.5">xanax</option>
-          </select>
+            <select name="outputSubstance" class="form-control" onchange="calculate()" id="outputSubstance"> </select>
 
           that is. </h3>
           <button type="button" class="btn btn-primary">Calculate</button>
