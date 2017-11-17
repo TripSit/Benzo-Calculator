@@ -28,7 +28,7 @@
     ga('create', 'UA-4573307-8', 'auto');
     ga('send', 'pageview');
   </script>
-  <title>TripSit Benzo Calculator Tool</title>
+  <title>TripSit Benzo Dose Calculator</title>
 </head>
 
 <body>
@@ -57,16 +57,15 @@
                <br>
                <br>
           <h3>
-            I have <input type="text" name="dose" value="0" size="8" onchange="calculate()" class="form-control"> mg of
-            <select name="inputSubstance" class="form-control" id="inputsubstance"> </select>
+            I have <input type="text" name="dose" value="0" size="8" oninput="calculate()" class="form-control"> mg of
+            <select name="inputSubstance" class="form-control" id="inputsubstance" onchange="calculate()"> </select>
              and I want to know how much
 
             <select name="outputSubstance" class="form-control" onchange="calculate()" id="outputSubstance"> </select>
 
           that is. </h3>
-          <button type="button" class="btn btn-primary">Calculate</button>
 
-            <h3>That equals to <input type="text" name="resultOutput" value="0" size="4" class="form-control"> mg of <input type="text" name="outputName" value="" size="10" class="form-control" placeholder=""></h3>
+            <h3>That equals to <input type="text" name="resultOutput" value="0" size="4" class="form-control">  mg of <span id="outputName"></span></h3>
           </form>
        </div>
           <p>Note: It's a good idea to start with a lower dose than the calculator shows, since everybody can react differently to different substances</p>
