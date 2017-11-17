@@ -44,15 +44,21 @@ window.onload = function () {
     { value: 0.5, name: 'Xanax' },
   ];
 
-  var select = document.getElementById('outputSubstance');
+  var selectOutput = document.getElementById('outputSubstance');
   for (i = 0; i < outputArray.length; i++) {
-    select.options[select.options.length] = new Option(outputArray[i].name, outputArray[i].value);
+    selectOutput.options[selectOutput.options.length] = new Option(outputArray[i].name,
+      outputArray[i].value);
   }
 
-  var select2 = document.getElementById('inputsubstance');
+  var selectInput = document.getElementById('inputsubstance');
   for (i = 0; i < outputArray.length; i++) {
-    select2.options[select2.options.length] = new Option(outputArray[i].name, outputArray[i].value);
+    selectInput.options[selectInput.options.length] = new Option(outputArray[i].name,
+      outputArray[i].value);
   }
+};
+
+Number.prototype.round = function (places) {
+  return +(Math.round(this + 'e+' + places) + 'e-' + places);
 };
 
 function calculate() {
@@ -64,6 +70,7 @@ parseFloat(document.calcform.inputSubstance.options[
   document.calcform.inputSubstance.selectedIndex].value) *
 parseFloat(document.calcform.outputSubstance.options[
   document.calcform.outputSubstance.selectedIndex].value);
-  document.calcform.resultOutput.value = calc;
-  document.calcform.outputName.value = selectedText;
+  document.calcform.resultOutput.value = calc.round(2);
+  var paragraph = document.getElementById('outputName');
+  paragraph.textContent = selectedText;
 }
