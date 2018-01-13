@@ -71,6 +71,9 @@ parseFloat(document.calcform.inputSubstance.options[
 parseFloat(document.calcform.outputSubstance.options[
   document.calcform.outputSubstance.selectedIndex].value);
   document.calcform.resultOutput.value = calc.round(2);
+  if (isNaN(calc)) {
+    return;
+  }
   var paragraph = document.getElementById('outputName');
   paragraph.textContent = selectedText;
 }
