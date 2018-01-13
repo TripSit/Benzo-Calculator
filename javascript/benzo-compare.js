@@ -1,4 +1,4 @@
-window.onload = function () {
+$(document).ready(function() {
   var outputArray = [
     { value: 0.5, name: 'Alprazolam' },
     { value: 1, name: 'Ativan' },
@@ -43,37 +43,41 @@ window.onload = function () {
     { value: 10, name: 'Valium' },
     { value: 0.5, name: 'Xanax' },
   ];
+  var data = $.map(outputArray, function (obj) {
+    obj.text = obj.text || obj.name;
+    obj.id = obj.id || obj.value;
+    return obj;
+  });
 
-  var selectOutput = document.getElementById('outputSubstance');
-  for (i = 0; i < outputArray.length; i++) {
-    selectOutput.options[selectOutput.options.length] = new Option(outputArray[i].name,
-      outputArray[i].value);
-  }
+  $('#inputsubstance').select2({
+    data: data,
+    width: '180px',
+  });
+  $('#outputSubstance').select2({
+    data: data,
+    width: '180px',
+  });
 
-  var selectInput = document.getElementById('inputsubstance');
-  for (i = 0; i < outputArray.length; i++) {
-    selectInput.options[selectInput.options.length] = new Option(outputArray[i].name,
-      outputArray[i].value);
-  }
-};
+});
 
 Number.prototype.round = function (places) {
   return +(Math.round(this + 'e+' + places) + 'e-' + places);
 };
 
 function calculate() {
-  var t = document.getElementById('outputSubstance');
-  var selectedText = t.options[t.selectedIndex].text;
+  var t = document.getElementById('select2-outputSubstance-container');
+  var selectedText = t.title;
   var calc;
   calc = parseFloat(document.calcform.dose.value) /
 parseFloat(document.calcform.inputSubstance.options[
   document.calcform.inputSubstance.selectedIndex].value) *
 parseFloat(document.calcform.outputSubstance.options[
   document.calcform.outputSubstance.selectedIndex].value);
-  document.calcform.resultOutput.value = calc.round(2);
   if (isNaN(calc)) {
     return;
   }
+
+  document.calcform.resultOutput.value = calc.round(2);
   var paragraph = document.getElementById('outputName');
   paragraph.textContent = selectedText;
 }
