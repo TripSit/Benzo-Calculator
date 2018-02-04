@@ -7,7 +7,7 @@ $(document).ready(function() {
     { value: 20, name: 'Clobazam' },
     { value: 0.5, name: 'Clonazepam' },
     { value: 15, name: 'Clorazepate' },
-    { value: 23, name: 'Calmane' },
+    { value: 23, name: 'Dalmane' },
     { value: 10, name: 'Diazepam' },
     { value: 20, name: 'Doral' },
     { value: 1.5, name: 'Dormonoct' },
@@ -60,6 +60,13 @@ $(document).ready(function() {
 
 });
 
+$(document).on('keyup keypress', 'form input[type="text"]', function (e) {
+  if (e.which == 13) {
+    e.preventDefault();
+    return false;
+  }
+});
+
 Number.prototype.round = function (places) {
   return +(Math.round(this + 'e+' + places) + 'e-' + places);
 };
@@ -77,7 +84,8 @@ parseFloat(document.calcform.outputSubstance.options[
     return;
   }
 
-  document.calcform.resultOutput.value = calc.round(2);
-  var paragraph = document.getElementById('outputName');
-  paragraph.textContent = selectedText;
+  $('#outputDose').text(calc.round(2));
+  $('#outputName').text(selectedText);
+  var selectedLowCase = selectedText.toLowerCase();
+  $('#outputName').attr('href', 'http://drugs.tripsit.me/' + selectedLowCase);
 }

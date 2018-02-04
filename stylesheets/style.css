@@ -287,6 +287,5 @@ border-color:#FFFF9D;
 }
 
 .jumbotron p {
-line-height: 150%;
-font-size: 12px
+font-size: 13px !important;
 }
