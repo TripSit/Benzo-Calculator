@@ -4,7 +4,7 @@ $(document).ready(function() {
     { value: 1, name: 'Ativan' },
     { value: 5.5, name: 'Bromazepam' },
     { value: 15, name: 'Centrax' },
-    { value: 20, name: 'Clobazam' },
+    { value: 10, name: 'Clobazam' },
     { value: 0.5, name: 'Clonazepam' },
     { value: 15, name: 'Clorazepate' },
     { value: 23, name: 'Dalmane' },
