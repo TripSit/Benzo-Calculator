@@ -152,8 +152,7 @@ font-weight: normal;
 /* Base styles (regardless of theme) */
 .bs-callout {
   margin: 20px 0;
-  padding: 15px 15px 15px 15px;
-padding-top:5px;
+  padding: 10px 15px 5px 5px;
   border-left: 5px solid #aaa;
 background-color:#eeeeee;
 }
