@@ -1,0 +1,27 @@
+{
+  "name": "benzo-calculator",
+  "version": "2.0.0",
+  "description": "A simple calculator to help users figure out how much one benzo dose equals to in another (how much is 1 mg xanax equal to in valium)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TripSit/Benzo-Calculator.git"
+  },
+  "author": "bjorn",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TripSit/Benzo-Calculator/issues"
+  },
+  "homepage": "https://github.com/TripSit/Benzo-Calculator#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "path": "^0.12.7",
+    "request": "^2.83.0",
+    "routes": "^2.1.0",
+    "underscore": "^1.8.3"
+  }
+}
