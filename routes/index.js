@@ -6,6 +6,7 @@ var router = express.Router();
 var drugCache = {};
 var aliasCache = {};
 var benzoCache = {};
+var totalCache = {};
 var diazepamCache = {};
 var updateCache = function() {
   try {
@@ -15,14 +16,27 @@ var updateCache = function() {
     }, function(request, response, body) {
       try { // Get cache
         drugCache = body.data[0];
+        // update alias cache
+        
        // Get all benzodiazepines that can be dose compared
         benzoCache = {};
-        diazepamCache = {};
-        
+        // search for the first number sequence of a number in a sentence
+        var regex = /[0-9]+\.?[0-9]?/
+        // Filter any drug not with the dose_to_diazepam property and sort them by name
         benzoCache = _.filter((drugCache), function(drugCache) { return _.has(drugCache.properties, 'dose_to_diazepam'); });
-        benzoCache = _.sortBy(benzoCache, 'name');
-        // this does not work
-        diazepamCache = _.each(benzoCache.dose._to_diazepam, alert);
+        aliasCache = {};
+        _.each(benzoCache, function(d) {
+          _.each(d.aliases, function(a) {
+            aliasCache[a] = d.name; 
+          }); 
+        });
+        totalCache = aliasCache + benzoCache;
+        totalCache = _.sortBy(benzoCache, 'name');
+        // Apply a value Select2 can use to calculate with
+        totalCache = _.each(totalCache, function(totalCache){
+           totalCache.diazvalue = regex.exec(totalCache.properties.dose_to_diazepam);
+        });
+        
       } catch (err) {}
     });
   } catch (err) {}
@@ -36,7 +50,7 @@ updateCache();
 // Routes
 router.get("/", function(req, res){
 //   var drugs = _.sortBy(drugCache, 'name');
-   res.render("index",{benzo: benzoCache, diaz: diazepamCache});
+   res.render("index",{benzo: totalCache, alias: aliasCache});
 });
 
 

@@ -13,7 +13,6 @@
   <script type="text/javascript" src="/javascripts/lib/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="/javascripts/lib/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-  <!--<script type="text/javascript" src="/javascripts/data.js"></script>-->
   <script type="text/javascript" src="/javascripts/benzo-compare.js"></script>
   
   <title>TripSit Benzodiazepine Dose Calculator</title>
@@ -21,6 +20,7 @@
 
 <body>
    <script type="text/javascript">var benzo = <%- JSON.stringify(benzo) %>;</script>
+   <script type="text/javascript">var alias = <%- JSON.stringify(alias) %>;</script>
   <div class="center">
     <a href="/"><img src="images/chat-banner.png" style="padding:0;margin:0;width:100%;" class="img-responsive"></a>
     </div>
@@ -61,16 +61,25 @@
                <div class="bs-callout bs-callout-danger"><h4><b>Important</b>: Equivalent doses may be inaccurate for larger quantities of benzos with different effect profiles. Please click on the drug name to see weighted dosage ranges.</h4></div>
           <h3>
             I have <input type="text" name="dose" value="0" size="8" oninput="calculate()" class="form-control"> mg of
-            <select name="inputSubstance" class="form-control" id="inputsubstance"  onchange="calculate()"> </select>
+            <select name="inputSubstance" class="form-control" id="inputSubstance"  onchange="calculate()"> </select>
              and I want to know how much
 
             <select name="outputSubstance" class="form-control" onchange="calculate()" id="outputSubstance"> </select>
           </form>
           that would be. </h3>
 
-            <h3>That equals to <span id="outputDose">0</span>  mg of  <a href="http://drugs.tripsit.me/alprazolam"  id="outputName">Alprazolam</a></h3>
+           
             
-            <h3>API CALL TEST <span id="apiCall"></span></h3>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-xs-1 col-md-5" id="inputInfo">
+                  <h3>Start benzodiazepine <a href="http://drugs.tripsit.me/alprazolam"  id="inputName">Alprazolam</a></h3>
+                </div>
+                <div class="col-xs-1 col-md-5" id="outPutinfo">
+                  <h3>That equals to <span id="outputDose">0</span>  mg of  <a href="http://drugs.tripsit.me/alprazolam"  id="outputName">Alprazolam</a></h3>
+                </div>
+              </div>
+            </div>
           
        </div>
           <p>Note: It's a good idea to start with a lower dose than the calculator shows, since everybody can react differently to different substances</p>
