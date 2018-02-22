@@ -21,15 +21,21 @@ var updateCache = function() {
        // Get all benzodiazepines that can be dose compared
         benzoCache = {};
         // search for the first number sequence of a number in a sentence
-        var regex = /[0-9]+\.?[0-9]?/
-        // Filter any drug not with the dose_to_diazepam property and sort them by name
+        var regex = /[0-9]+\.?[0-9]?/;
+        // Filter any drug not containing the dose_to_diazepam property
         benzoCache = _.filter((drugCache), function(drugCache) { return _.has(drugCache.properties, 'dose_to_diazepam'); });
+        // Get all aliases
         aliasCache = {};
-        _.each(benzoCache, function(d) {
+        _.each(benzoCache, function(d, index) {
           _.each(d.aliases, function(a) {
-            aliasCache[a] = d.name; 
+            aliasCache[index] = { 
+                name: a,
+                pretty_name: a,
+                diazvalue: regex.exec(d.properties.dose_to_diazepam)
+              }; 
           }); 
         });
+        // Combine the two and sort by name
         totalCache = aliasCache + benzoCache;
         totalCache = _.sortBy(benzoCache, 'name');
         // Apply a value Select2 can use to calculate with
