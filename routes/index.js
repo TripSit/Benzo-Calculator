@@ -25,14 +25,14 @@ var updateCache = function() {
         // Filter any drug not containing the dose_to_diazepam property
         benzoCache = _.filter((drugCache), function(drugCache) { return _.has(drugCache.properties, 'dose_to_diazepam'); });
         // Get all aliases
-        aliasCache = {};
-        _.each(benzoCache, function(d, index) {
+        aliasCache = [];
+        _.each(benzoCache, function(d) {
           _.each(d.aliases, function(a) {
-            aliasCache[index] = { 
+            aliasCache.push({ 
                 name: a,
                 pretty_name: a,
                 diazvalue: regex.exec(d.properties.dose_to_diazepam)
-              }; 
+              }); 
           }); 
         });
         // Combine the two and sort by name
