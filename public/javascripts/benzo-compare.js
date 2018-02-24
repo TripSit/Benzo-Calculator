@@ -17,6 +17,8 @@ $(document).ready(function() {
 
 });
 
+
+
 $(document).on('keyup keypress', 'form input[type="text"]', function (e) {
   if (e.which == 13) {
     e.preventDefault();
@@ -48,4 +50,16 @@ function calculate() {
   var selectedLowCaseTextOutput = selectedTextOutput.toLowerCase();
   $('#inputName').attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseTextInput).text(selectedTextInput);
   $('#outputName').attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseTextOutput).text(selectedTextOutput);
+  
+
+   // will append stuff here eventually
+   //$('#outputSummary').text());
+ 
 }
+
+// testing thing that doesn't work 
+  // function filterBySelected(key){
+  //   return benzo.filter(function(key) {
+  //       return key == benzo.object.pretty_name[key];
+  //   });
+  // }

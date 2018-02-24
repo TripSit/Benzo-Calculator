@@ -4,10 +4,7 @@ var request = require('request');
 var router = express.Router();
 
 var drugCache = {};
-var aliasCache = {};
 var benzoCache = {};
-var totalCache = {};
-var diazepamCache = {};
 var updateCache = function() {
   try {
     // Get the drugs
@@ -16,31 +13,24 @@ var updateCache = function() {
     }, function(request, response, body) {
       try { // Get cache
         drugCache = body.data[0];
-        // update alias cache
-        
-       // Get all benzodiazepines that can be dose compared
         benzoCache = {};
-        // search for the first number sequence of a number in a sentence
-        var regex = /[0-9]+\.?[0-9]?/;
         // Filter any drug not containing the dose_to_diazepam property
         benzoCache = _.filter((drugCache), function(drugCache) { return _.has(drugCache.properties, 'dose_to_diazepam'); });
-        // Get all aliases
-        aliasCache = [];
+        // Get all aliases and assign the same values as the real name
         _.each(benzoCache, function(d) {
           _.each(d.aliases, function(a) {
-            aliasCache.push({ 
+            benzoCache.push({ 
                 name: a,
                 pretty_name: a,
-                diazvalue: regex.exec(d.properties.dose_to_diazepam)
+                properties: d.properties,
               }); 
           }); 
         });
-        // Combine the two and sort by name
-        totalCache = aliasCache + benzoCache;
-        totalCache = _.sortBy(benzoCache, 'name');
+        benzoCache = _.sortBy(benzoCache, 'name');
         // Apply a value Select2 can use to calculate with
-        totalCache = _.each(totalCache, function(totalCache){
-           totalCache.diazvalue = regex.exec(totalCache.properties.dose_to_diazepam);
+        var regex = /[0-9]+\.?[0-9]?/; // search for the first number sequence of a number in a sentence
+        benzoCache = _.each(benzoCache, function(benzoCache){
+           benzoCache.diazvalue = regex.exec(benzoCache.properties.dose_to_diazepam);
         });
         
       } catch (err) {}
@@ -56,7 +46,7 @@ updateCache();
 // Routes
 router.get("/", function(req, res){
 //   var drugs = _.sortBy(drugCache, 'name');
-   res.render("index",{benzo: totalCache, alias: aliasCache});
+   res.render("index",{benzo: benzoCache});
 });
 
 
