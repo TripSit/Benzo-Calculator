@@ -153,6 +153,7 @@ Number.prototype.round = function(places) {
   return +(Math.round(this + 'e+' + places) + 'e-' + places);
 };
 
+// Calculate the difference in dose and run functions to change info shown
 function calculate() {
   var output = document.getElementById('select2-outputSubstance-container');
   var input = document.getElementById('select2-inputSubstance-container');

@@ -31,10 +31,10 @@ function sortCache() {
 
 function formatCache() {
   benzoCache = {};
-        // Filter any drug not containing the dose_to_diazepam property
-        benzoCache = _.filter((drugCache), function(drugCache) {
-          return _.has(drugCache.properties, 'dose_to_diazepam');
-        });
+  // Filter any drug not containing the dose_to_diazepam property
+  benzoCache = _.filter((drugCache), function(drugCache) {
+   return _.has(drugCache.properties, 'dose_to_diazepam');
+ });
 }
 
 var updateCache = function() {
@@ -43,15 +43,15 @@ var updateCache = function() {
   'json': true,
  }, 
  function(request, response, body) {
-    // Get cache
-    drugCache = body.data[0];
-    // Format Dose
-    formatCache();
-    // Get all aliases
-    getAlias();
-    // Sort cache
-    sortCache();
-  });
+  // Get cache
+  drugCache = body.data[0];
+  // Format Dose
+  formatCache();
+  // Get all aliases
+  getAlias();
+  // Sort cache
+  sortCache();
+ });
 };
 
 // Update from our cache every minute, update from erowid's api every 60 minutes
