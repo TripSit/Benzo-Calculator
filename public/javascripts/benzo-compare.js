@@ -1,4 +1,5 @@
 $(document).ready(function() {
+  
   // Convert object into a map so it works with Select2
   var data = $.map(benzo, function(obj) {
     obj.text = obj.text || obj.pretty_name;
@@ -9,6 +10,16 @@ $(document).ready(function() {
   $('#inputSubstance').select2({
     data: data,
     width: '180px',
+  });
+  // Pick a random option for output
+  var randomIndex = Math.floor(Math.random()*benzo.length); 
+  var iter = 0; 
+  $.map(benzo, function(obj) { 
+    if (randomIndex == iter) { 
+      obj.selected = true; 
+    } 
+    iter += 1; 
+    return obj; 
   });
   $('#outputSubstance').select2({
     data: data,
