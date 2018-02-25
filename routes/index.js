@@ -38,7 +38,7 @@ function formatCache() {
 }
 
 var updateCache = function() {
-    // Get the drugs
+ // Get the drugs
  request.get('http://tripbot.tripsit.me/api/tripsit/getAllDrugs', {
   'json': true,
  }, 
@@ -60,10 +60,7 @@ updateCache();
 
 // Routes
 router.get("/", function(req, res) {
-  //   var drugs = _.sortBy(drugCache, 'name');
-  res.render("index", {
-    benzo: benzoCache
-  });
+  res.render("index", {benzo: benzoCache});
 });
 
 module.exports = router;

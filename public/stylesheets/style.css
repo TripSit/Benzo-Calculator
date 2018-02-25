@@ -308,9 +308,11 @@ font-size: 14px !important;
   padding-left: 0;
 }
 
+/*hardcore height for the Summary so it looks symmetric */
 .list-group > li:nth-of-type(3) {
   height: 9em;
 }
+/*hardcore height for the Effects so it looks symmetric */
 .list-group > li:nth-of-type(5) {
   height: 7em;
 }
@@ -328,5 +330,4 @@ font-size: 14px !important;
   .list-group > li:nth-of-type(3), .list-group > li:nth-of-type(5) {
   height: auto;
   }
-
 }
