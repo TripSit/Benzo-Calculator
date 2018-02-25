@@ -285,6 +285,48 @@ border-color:#FFFF9D;
   background-color: #e67e22;
 }
 
+h2 {
+  text-align: center;
+  font-size: 3em;
+}
+
+.jumbotron {
+  margin:2% 4%;
+}
+
 .jumbotron p {
-font-size: 13px !important;
+font-size: 14px !important;
+}
+
+.center {
+  text-align: center;
+}
+#outputInfo {
+  padding-right: 0;
+}
+#inputInfo {
+  padding-left: 0;
+}
+
+.list-group > li:nth-of-type(3) {
+  height: 9em;
+}
+.list-group > li:nth-of-type(5) {
+  height: 7em;
+}
+
+@media (max-width: 500px) {
+  .jumbotron {
+    margin: 2% 0px;
+  }
+  p {
+    font-weight: 600 !important;
+  }
+  #outputInfo, #inputInfo {
+    padding: 0;
+  }
+  .list-group > li:nth-of-type(3), .list-group > li:nth-of-type(5) {
+  height: auto;
+  }
+
 }
