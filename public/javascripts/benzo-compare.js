@@ -11,6 +11,7 @@ $(document).ready(function() {
     data: data,
     width: '180px',
   });
+  
   // Pick a random option for output
   var randomIndex = Math.floor(Math.random()*benzo.length); 
   var iter = 0; 
@@ -25,7 +26,10 @@ $(document).ready(function() {
     data: data,
     width: '180px',
   });
-  calculate();
+  // Append output information
+  appendData('output');
+  // Append input information
+  appendData('input');
 });
 
 // Extract needed values from the returned object
@@ -70,76 +74,92 @@ function find_by_pretty(benzo, pretty_name) {
 }
 
 // Fill out the list-group info
-function appendData(id, obj) {
+function appendData(id) {
+  var selectedId = document.getElementById('select2-' + id + 'Substance-container');
   var output = document.getElementById('select2-outputSubstance-container');
-  var input = document.getElementById('select2-inputSubstance-container');
-  var selectedTextInput = input.title;
-  var selectedTextOutput = output.title;
-  var selectedLowCaseTextInput = selectedTextInput.toLowerCase();
-  var selectedLowCaseTextOutput = selectedTextOutput.toLowerCase();
-  // Decide if input data or output data
-  if(obj == input){
-  	var obj_benzo = find_by_pretty(benzo, selectedTextInput);
-  	obj_benzo = render_pretty(obj_benzo);
-  	$('#inputName').attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseTextInput).text(selectedTextInput);
-  } else {
-	var obj_benzo = find_by_pretty(benzo, selectedTextOutput);
-	obj_benzo = render_pretty(obj_benzo);
-	$('#outputName').attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseTextOutput).text(selectedTextOutput);
-  }
+  var selectedText = selectedId.title;
+  var selectedLowCaseText = selectedText.toLowerCase();
+
+	var id_benzo = find_by_pretty(benzo, selectedText);
+	id_benzo = render_pretty(id_benzo);
+	$('#' + id + 'Name').fadeOut(400, function(){
+	  $(this).attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseText).text(selectedText)
+   }).fadeIn(600);
+ 
   // Add correct values to the two input-groups. A bit messy due to the API
-  if (obj_benzo.summary !== undefined) {
-    $('#' + id + 'Summary').text(obj_benzo.summary);
+  if (id_benzo.summary !== undefined) {
+    $('#' + id + 'Summary').fadeOut(400, function(){
+      $(this).text(id_benzo.summary)
+    }).fadeIn(600);
   } else {
-    $('#' + id + 'Summary').text('No summary available');
+    $('#' + id + 'Summary').fadeOut(400, function(){
+    $(this).text('No summary available')
+    }).fadeIn(600); 
   }
-  if (obj_benzo.effects !== undefined) {
-    $('#' + id + 'Effects').text(obj_benzo.effects);
+  if (id_benzo.effects !== undefined) {
+    $('#' + id + 'Effects').fadeOut(400, function(){
+      $(this).text(id_benzo.effects)
+    }).fadeIn(600);
   } else {
-    $('#' + id + 'Effects').text('No effects available');
-  }
-  if (obj_benzo.duration !== undefined) {
-    $('#' + id + 'Duration').text(obj_benzo.duration);
+    $('#' + id + 'Effects').fadeOut(400, function(){
+    $(this).text('No effects available')
+    }).fadeIn(600); }
+  if (id_benzo.duration !== undefined) {
+    $('#' + id + 'Duration').fadeOut(400, function(){
+      $(this).text(id_benzo.duration).fadeIn(600);
+    })
   } else {
-    $('#' + id + 'Duration').text('No duration available');
+    $('#' + id + 'Duration').fadeOut(400, function(){
+    $(this).text('No duration available')
+    }).fadeIn(600); 
   }
-  if (obj_benzo.aftereffects !== undefined) {
-    $('#' + id + 'Aftereffects').text(obj_benzo.aftereffects);
+  if (id_benzo.aftereffects !== undefined) {
+    $('#' + id + 'Aftereffects').fadeOut(400, function(){
+      $(this).text(id_benzo.aftereffects)
+    }).fadeIn(600);
   } else {
-    $('#' + id + 'Aftereffects').text('No aftereffects available');
+    $('#' + id + 'Aftereffects').fadeOut(400, function(){
+    $(this).text('No aftereffects available')
+    }).fadeIn(600);
   }
-  if (obj_benzo.doseLight !== undefined) {
-    $('#' + id + 'DoseLow').text('Light: ' + obj_benzo.doseLight);
-    $('#' + id + 'DoseLow').show();
-  } else if (obj_benzo.doseLow !== undefined) {
-    $('#' + id + 'DoseLow').text('Light: ' + obj_benzo.doseLow);
-    $('#' + id + 'DoseLow').show();
+  if (id_benzo.doseLight !== undefined) {
+    $('#' + id + 'DoseLow').fadeOut(400, function(){
+      $(this).text('Light: ' + id_benzo.doseLight)
+    }).fadeIn(600);
+  } else if (id_benzo.doseLow !== undefined) {
+    $('#' + id + 'DoseLow').fadeOut(400, function(){
+      $(this).text('Light: ' + id_benzo.doseLow)
+    }).fadeIn(600);
   } else {
-    $('#' + id + 'DoseLow').hide();
+    $('#' + id + 'DoseLow').fadeOut(400);
   }
-  if (obj_benzo.doseCommon !== undefined) {
-    $('#' + id + 'DoseCommon').text('Common: ' + obj_benzo.doseCommon);
-    $('#' + id + 'DoseCommon').show();
+  if (id_benzo.doseCommon !== undefined) {
+    $('#' + id + 'DoseCommon').fadeOut(400, function(){
+      $(this).text('Common: ' + id_benzo.doseCommon)
+    }).fadeIn(600);
   } else {
-    $('#' + id + 'DoseCommon').hide();
+    $('#' + id + 'DoseCommon').fadeOut();
   }
-  if (obj_benzo.doseStrong !== undefined) {
-    $('#' + id + 'DoseStrong').text('Strong: ' + obj_benzo.doseStrong);
-    $('#' + id + 'DoseStrong').show();
+  if (id_benzo.doseStrong !== undefined) {
+    $('#' + id + 'DoseStrong').fadeOut(400, function(){
+      $(this).text('Strong: ' + id_benzo.doseStrong)
+    }).fadeIn(1000);
   } else {
-    $('#' + id + 'DoseStrong').hide();
+    $('#' + id + 'DoseStrong').fadeOut(400);
   }
-  if (obj_benzo.doseHeavy !== undefined) {
-    $('#' + id + 'DoseHeavy').text('Heavy: ' + obj_benzo.doseHeavy);
-    $('#' + id + 'DoseHeavy').show();
+  if (id_benzo.doseHeavy !== undefined) {
+    $('#' + id + 'DoseHeavy').fadeOut(400, function(){
+      $(this).text('Heavy: ' + id_benzo.doseHeavy)
+    }).fadeIn(1000);
   } else {
-    $('#' + id + 'DoseHeavy').hide();
+    $('#' + id + 'DoseHeavy').fadeOut(400);
   }
-  if (obj_benzo.doseHeavy !== undefined && obj_benzo.doseStrong !== undefined && obj_benzo.doseCommon !== undefined && obj_benzo.doseLight !== undefined && obj_benzo.doseLow !== undefined) {
-    $('#' + id + 'DoseLow').text('No information available');
-    $('#' + id + 'DoseLow').show();
+  if (id_benzo.doseHeavy !== undefined && id_benzo.doseStrong !== undefined && id_benzo.doseCommon !== undefined && id_benzo.doseLight !== undefined && id_benzo.doseLow !== undefined) {
+    $('#' + id + 'DoseLow').fadeOut(400, function(){
+      $(this).text('No information available')
+    }).fadeIn(600);
   }
-}
+};
 
 $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
   if (e.which == 13) {
@@ -155,11 +175,14 @@ Number.prototype.round = function(places) {
 
 // Calculate the difference in dose and run functions to change info shown
 function calculate() {
-  var output = document.getElementById('select2-outputSubstance-container');
   var input = document.getElementById('select2-inputSubstance-container');
+  var output = document.getElementById('select2-outputSubstance-container');
   var selectedTextInput = input.title;
   var selectedTextOutput = output.title;
+  var selectedLowCaseTextInput = selectedTextInput.toLowerCase();
+  var selectedLowCaseTextOutput = selectedTextOutput.toLowerCase();
   var calc;
+  
   calc = parseFloat(document.calcform.dose.value) /
     parseFloat(document.calcform.inputSubstance.options[
       document.calcform.inputSubstance.selectedIndex].value) *
@@ -171,10 +194,17 @@ function calculate() {
   }
   // Append benzo + start dose to the list-group
   $('#inputDoseResult').text(parseFloat(document.calcform.dose.value));
+
   // Calculate new dose
   $('#outputDoseResult').text(calc.round(2));
-  // Append output information
-  appendData('output', output);
-  // Append input information
-  appendData('input', input);
+}
+
+function newInput() {
+  calculate();
+  appendData('input');
+}
+
+function newOutput() {
+  calculate();
+  appendData('output');
 }
