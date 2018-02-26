@@ -10,11 +10,12 @@
   <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css">
   <script type="text/javascript" src="/javascripts/lib/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="/javascripts/lib/jquery.color.plus.names-2.1.2.js"></script>
   <script type="text/javascript" src="/javascripts/lib/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
   <script type="text/javascript" src="/javascripts/benzo-compare.js"></script>
 
-  <title>TripSit Benzodiazepine Dose Calculator</title>
+  <title>TripSit Benzodiazepine Converter</title>
 </head>
 
 <body>
@@ -84,22 +85,22 @@
                 <h3>Start dose:  <span id="inputDoseResult">0</span> mg of <a href="http://drugs.tripsit.me/alprazolam"  id="inputName">Alprazolam</a></h3></li>
               <li class="list-group-item">
                 <h4>Summary:</h4> </li>
-              <li class="list-group-item" id="inputSummary"></li>
+              <li class="list-group-item" ><span id="inputSummary"></span></li>
               <li class="list-group-item">
                 <h4>Effects:</h4> </li>
-              <li class="list-group-item" id="inputEffects"></li>
+              <li class="list-group-item" ><span id="inputEffects"></span></li>
               <li class="list-group-item">
                 <h4>Dose:</h4> </li>
-              <li class="list-group-item" id="inputDoseLow"></li>
-              <li class="list-group-item" id="inputDoseCommon"></li>
-              <li class="list-group-item" id="inputDoseStrong"></li>
-              <li class="list-group-item" id="inputDoseHeavy"></li>
+              <li class="list-group-item" ><span id="inputDoseLow"></span></li>
+              <li class="list-group-item" ><span id="inputDoseCommon"></span></li>
+              <li class="list-group-item" ><span id="inputDoseStrong"></span></li>
+              <li class="list-group-item" ><span id="inputDoseHeavy"></span></li>
               <li class="list-group-item">
                 <h4>Duration:</h4> </li>
-              <li class="list-group-item" id="inputDuration"></li>
+              <li class="list-group-item" ><span id="inputDuration"></span></li>
               <li class="list-group-item">
                 <h4>Aftereffects:</h4>
-                <li class="list-group-item" id="inputAftereffects"></li>
+                <li class="list-group-item" ><span id="inputAftereffects"></span></li>
             </ul>
           </div>
           <div class="col-xs-12 col-md-6" id="outputInfo">
@@ -108,22 +109,26 @@
                 <h3>Result dose: <span id="outputDoseResult">0</span> mg of <a href="http://drugs.tripsit.me/alprazolam"  id="outputName">Alprazolam</a></h3> </li>
               <li class="list-group-item">
                 <h4>Summary:</h4> </li>
-              <li class="list-group-item" id="outputSummary"></li>
+              <li class="list-group-item" ><span id="outputSummary"></span></li>
               <li class="list-group-item">
-                <h4>Effects:</h4> </li>
-              <li class="list-group-item" id="outputEffects"></li>
+                <h4>Effects:</h4> 
+              </li>
+              <li class="list-group-item"><span  id="outputEffects"></span></li>
               <li class="list-group-item">
-                <h4>Dose:</h4> </li>
-              <li class="list-group-item" id="outputDoseLow"></li>
-              <li class="list-group-item" id="outputDoseCommon"></li>
-              <li class="list-group-item" id="outputDoseStrong"></li>
-              <li class="list-group-item" id="outputDoseHeavy"></li>
+                <h4>Dose:</h4> 
+              </li>
+              <li class="list-group-item"><span id="outputDoseLow"></span></li>
+              <li class="list-group-item"><span id="outputDoseCommon"></span></li>
+              <li class="list-group-item"><span id="outputDoseStrong"></span></li>
+              <li class="list-group-item"><span id="outputDoseHeavy"></span></li>
               <li class="list-group-item">
-                <h4>Duration:</h4> </li>
-              <li class="list-group-item" id="outputDuration"></li>
+                <h4>Duration:</h4>
+              </li>
+              <li class="list-group-item"><span id="outputDuration"></span></li>
               <li class="list-group-item">
                 <h4>Aftereffects:</h4>
-                <li class="list-group-item" id="outputAftereffects"></li>
+              </li>
+                <li class="list-group-item"><span id="outputAftereffects"></span></li>
             </ul>
           </div>
         </div>

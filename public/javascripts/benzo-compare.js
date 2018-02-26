@@ -88,7 +88,7 @@ function appendData(id) {
  
   // Add correct values to the two input-groups. A bit messy due to the API
   if (id_benzo.summary !== undefined) {
-    $('#' + id + 'Summary').fadeOut(400, function(){
+    $('#' + id + 'Summary').text('').fadeOut(400, function(){
       $(this).text(id_benzo.summary)
     }).fadeIn(600);
   } else {
