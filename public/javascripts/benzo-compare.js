@@ -9,7 +9,7 @@ $(document).ready(function() {
   // Fill out dropdown menus
   $('#inputSubstance').select2({
     data: data,
-    width: '180px',
+    width: '256px',
   });
   
   // Pick a random option for output
@@ -24,7 +24,7 @@ $(document).ready(function() {
   });
   $('#outputSubstance').select2({
     data: data,
-    width: '180px',
+    width: '256px',
   });
   // Append output information
   appendData('output');
