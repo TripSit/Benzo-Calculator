@@ -32,32 +32,31 @@ $(document).ready(function() {
   appendData('input');
 });
 
+
+
 // Extract needed values from the returned object
+
 function render_pretty(a) {
   var benzoProperties = new Object();
   benzoProperties.summary = a['properties']['summary'];
   benzoProperties.effects = a['properties']['effects'];
   benzoProperties.duration = a['properties']['duration'];
   benzoProperties.aftereffects = a['properties']['after-effects'];
-  if (a['formatted_dose']['Oral'] != undefined) {
-    benzoProperties.doseLight = a['formatted_dose']['Oral']['Light'];
-    benzoProperties.doseLow = a['formatted_dose']['Oral']['Low'];
-    benzoProperties.doseCommon = a['formatted_dose']['Oral']['Common'];
-    benzoProperties.doseHeavy = a['formatted_dose']['Oral']['Heavy'];
-    benzoProperties.doseStrong = a['formatted_dose']['Oral']['Strong'];
-  } else if (a['formatted_dose']['none'] != undefined) {
-    benzoProperties.doseLight = a['formatted_dose']['none']['Light'];
-    benzoProperties.doseLow = a['formatted_dose']['none']['Low'];
-    benzoProperties.doseCommon = a['formatted_dose']['none']['Common'];
-    benzoProperties.doseHeavy = a['formatted_dose']['none']['Heavy'];
-    benzoProperties.doseStrong = a['formatted_dose']['none']['Strong'];
-  } else if (a['formatted_dose']['Light:'] != undefined) {
-    benzoProperties.doseLight = a['formatted_dose']['Light:']['Light'];
-    benzoProperties.doseLow = a['formatted_dose']['Light:']['Low'];
-    benzoProperties.doseCommon = a['formatted_dose']['Light:']['Common'];
-    benzoProperties.doseHeavy = a['formatted_dose']['Light:']['Heavy'];
-    benzoProperties.doseStrong = a['formatted_dose']['Light:']['Strong'];
-  }
+  
+  let checkArrayName = function (name, array) {
+    if (array['formatted_dose'][name] != undefined) {
+    benzoProperties.doseLight = array['formatted_dose'][name]['Light'];
+    benzoProperties.doseLow = array['formatted_dose'][name]['Low'];
+    benzoProperties.doseCommon = array['formatted_dose'][name]['Common'];
+    benzoProperties.doseHeavy = array['formatted_dose'][name]['Heavy'];
+    benzoProperties.doseStrong = array['formatted_dose'][name]['Strong'];
+    }
+  };
+  
+  checkArrayName('Oral', a);
+  checkArrayName('none', a);
+  checkArrayName('Light:', a);
+  
   return benzoProperties;
 }
 
@@ -73,6 +72,32 @@ function find_by_pretty(benzo, pretty_name) {
   return found;
 }
 
+ // Add text info to the two input-groups.
+
+var benzoText = function(benzoId, textName, id) {
+    if (benzoId !== undefined) {
+    $('#' + id + textName).text('').fadeOut(400, function(){
+      $(this).text(benzoId)
+    }).fadeIn(600);
+    } else {
+      $('#' + id + textName).fadeOut(400, function(){
+      $(this).text('No ' + textName.toLowerCase() + ' available')
+      }).fadeIn(600); 
+    }
+};
+
+// Add dossage info to the two input-groups.
+
+var benzoDose = function(benzoId,doseId, doseName, id) {
+    if (benzoId !== undefined) {
+    $('#' + id + doseId).fadeOut(400, function(){
+      $(this).text(doseName + ': ' + benzoId)
+    }).fadeIn(600);
+    } else {
+      $('#' + id + doseId).fadeOut();
+    }
+};
+
 // Fill out the list-group info
 function appendData(id) {
   var selectedId = document.getElementById('select2-' + id + 'Substance-container');
@@ -86,74 +111,17 @@ function appendData(id) {
 	  $(this).attr('href', 'http://drugs.tripsit.me/' + selectedLowCaseText).text(selectedText)
    }).fadeIn(600);
  
-  // Add correct values to the two input-groups. A bit messy due to the API
-  if (id_benzo.summary !== undefined) {
-    $('#' + id + 'Summary').text('').fadeOut(400, function(){
-      $(this).text(id_benzo.summary)
-    }).fadeIn(600);
-  } else {
-    $('#' + id + 'Summary').fadeOut(400, function(){
-    $(this).text('No summary available')
-    }).fadeIn(600); 
-  }
-  if (id_benzo.effects !== undefined) {
-    $('#' + id + 'Effects').fadeOut(400, function(){
-      $(this).text(id_benzo.effects)
-    }).fadeIn(600);
-  } else {
-    $('#' + id + 'Effects').fadeOut(400, function(){
-    $(this).text('No effects available')
-    }).fadeIn(600); }
-  if (id_benzo.duration !== undefined) {
-    $('#' + id + 'Duration').fadeOut(400, function(){
-      $(this).text(id_benzo.duration).fadeIn(600);
-    })
-  } else {
-    $('#' + id + 'Duration').fadeOut(400, function(){
-    $(this).text('No duration available')
-    }).fadeIn(600); 
-  }
-  if (id_benzo.aftereffects !== undefined) {
-    $('#' + id + 'Aftereffects').fadeOut(400, function(){
-      $(this).text(id_benzo.aftereffects)
-    }).fadeIn(600);
-  } else {
-    $('#' + id + 'Aftereffects').fadeOut(400, function(){
-    $(this).text('No aftereffects available')
-    }).fadeIn(600);
-  }
-  if (id_benzo.doseLight !== undefined) {
-    $('#' + id + 'DoseLow').fadeOut(400, function(){
-      $(this).text('Light: ' + id_benzo.doseLight)
-    }).fadeIn(600);
-  } else if (id_benzo.doseLow !== undefined) {
-    $('#' + id + 'DoseLow').fadeOut(400, function(){
-      $(this).text('Light: ' + id_benzo.doseLow)
-    }).fadeIn(600);
-  } else {
-    $('#' + id + 'DoseLow').fadeOut(400);
-  }
-  if (id_benzo.doseCommon !== undefined) {
-    $('#' + id + 'DoseCommon').fadeOut(400, function(){
-      $(this).text('Common: ' + id_benzo.doseCommon)
-    }).fadeIn(600);
-  } else {
-    $('#' + id + 'DoseCommon').fadeOut();
-  }
-  if (id_benzo.doseStrong !== undefined) {
-    $('#' + id + 'DoseStrong').fadeOut(400, function(){
-      $(this).text('Strong: ' + id_benzo.doseStrong)
-    }).fadeIn(1000);
-  } else {
-    $('#' + id + 'DoseStrong').fadeOut(400);
-  }
-  if (id_benzo.doseHeavy !== undefined) {
-    $('#' + id + 'DoseHeavy').fadeOut(400, function(){
-      $(this).text('Heavy: ' + id_benzo.doseHeavy)
-    }).fadeIn(1000);
-  } else {
-    $('#' + id + 'DoseHeavy').fadeOut(400);
-  }
+  // Add text info to the two input-groups.
+  benzoText(id_benzo.summary, 'Summary', id);
+  benzoText(id_benzo.effects, 'Effects', id);
+  benzoText(id_benzo.duration, 'Duration', id);
+  benzoText(id_benzo.aftereffects, 'Aftereffects', id);
+  // Add dossage info to the two input-groups.
+  benzoDose(id_benzo.doseLight || id_benzo.doseLow, 'DoseLow', 'Light', id);
+  benzoDose(id_benzo.doseCommon, 'DoseCommon', 'Common', id);
+  benzoDose(id_benzo.doseStrong, 'DoseStrong', 'Strong', id);
+  benzoDose(id_benzo.doseHeavy, 'DoseHeavy', 'Heavy', id);
+  // If no dosage available 
   if (id_benzo.doseHeavy !== undefined && id_benzo.doseStrong !== undefined && id_benzo.doseCommon !== undefined && id_benzo.doseLight !== undefined && id_benzo.doseLow !== undefined) {
     $('#' + id + 'DoseLow').fadeOut(400, function(){
       $(this).text('No information available')
