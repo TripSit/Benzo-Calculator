@@ -136,7 +136,7 @@ $(document).on('keyup keypress', 'form input[type="text"]', function(e) {
   }
 });
 
-// Round the result off
+// Round the result
 Number.prototype.round = function(places) {
   return +(Math.round(this + 'e+' + places) + 'e-' + places);
 };
@@ -149,19 +149,17 @@ function calculate() {
   var selectedTextOutput = output.title;
   var selectedLowCaseTextInput = selectedTextInput.toLowerCase();
   var selectedLowCaseTextOutput = selectedTextOutput.toLowerCase();
-  var calc;
+  var inputDose = document.getElementById("inputDose").value;
+  var inputDoseValue = document.getElementById("inputSubstance").value;
+  var outputDoseValue = document.getElementById("outputSubstance").value;
   
-  calc = parseFloat(document.calcform.dose.value) /
-    parseFloat(document.calcform.inputSubstance.options[
-      document.calcform.inputSubstance.selectedIndex].value) *
-    parseFloat(document.calcform.outputSubstance.options[
-      document.calcform.outputSubstance.selectedIndex].value);
+  var calc = inputDose / inputDoseValue * outputDoseValue;
   // Ignore anything not a number
   if (isNaN(calc)) {
     return;
   }
   // Append benzo + start dose to the list-group
-  $('#inputDoseResult').text(parseFloat(document.calcform.dose.value));
+  $('#inputDoseResult').text(inputDose);
 
   // Calculate new dose
   $('#outputDoseResult').text(calc.round(2));
