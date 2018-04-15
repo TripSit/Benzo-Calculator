@@ -122,7 +122,7 @@ function appendData(id) {
   benzoDose(id_benzo.doseStrong, 'DoseStrong', 'Strong', id);
   benzoDose(id_benzo.doseHeavy, 'DoseHeavy', 'Heavy', id);
   // If no dosage available 
-  if (id_benzo.doseHeavy !== undefined && id_benzo.doseStrong !== undefined && id_benzo.doseCommon !== undefined && id_benzo.doseLight !== undefined && id_benzo.doseLow !== undefined) {
+  if (!id_benzo.doseHeavy && !id_benzo.doseStrong && !id_benzo.doseCommon && !id_benzo.doseLight && !id_benzo.doseLow) {
     $('#' + id + 'DoseLow').fadeOut(400, function(){
       $(this).text('No information available')
     }).fadeIn(600);
@@ -143,12 +143,6 @@ Number.prototype.round = function(places) {
 
 // Calculate the difference in dose and run functions to change info shown
 function calculate() {
-  var input = document.getElementById('select2-inputSubstance-container');
-  var output = document.getElementById('select2-outputSubstance-container');
-  var selectedTextInput = input.title;
-  var selectedTextOutput = output.title;
-  var selectedLowCaseTextInput = selectedTextInput.toLowerCase();
-  var selectedLowCaseTextOutput = selectedTextOutput.toLowerCase();
   var inputDose = document.getElementById("inputDose").value;
   var inputDoseValue = document.getElementById("inputSubstance").value;
   var outputDoseValue = document.getElementById("outputSubstance").value;

@@ -10,7 +10,7 @@ function getAlias() {
   _.each(benzoCache, function (benzo) {
     _.each(benzo.aliases, function (alias) {
       benzoCache.push({
-        // Add used properties to new objects
+        // Add used aliases to new objects
         name: alias,
         pretty_name: alias.charAt(0).toUpperCase() + alias.slice(1),
         properties: benzo.properties,
@@ -22,8 +22,7 @@ function getAlias() {
 
 function sortCache() {
   benzoCache = _.sortBy(benzoCache, 'name');
-  // Apply a value Select2 can use to calculate with
-  var regex = /[0-9]+\.?[0-9]?/; // search for the first number sequence of a number in a sentence
+  let regex = /[0-9]+\.?[0-9]?/; // search for the first number in a sentence
   benzoCache = _.each(benzoCache, function (benzoCache) {
     benzoCache.diazvalue = regex.exec(benzoCache.properties.dose_to_diazepam);
   });
