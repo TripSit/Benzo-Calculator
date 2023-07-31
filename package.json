@@ -1,20 +1,25 @@
 {
   "name": "benzo-calculator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple calculator to help users figure out how much one benzo dose equals to in another (how much is 1 mg xanax equal to in valium)",
+  "homepage": "https://benzos.tripsit.me",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "docker compose --project-name apps up -d --force-recreate --build",
+    "## Docker": "",
+    "logs": "docker container logs calculator_benzos -f -n 100",
+    "test": "docker exec -it calculator_benzos npm run local:test",
+    "lint": "docker exec -it calculator_benzos npm run local:lint"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TripSit/Benzo-Calculator.git"
   },
   "author": "bjorn",
+  "maintainers": ["Eric Moonbear/Teknos"],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/TripSit/Benzo-Calculator/issues"
   },
-  "homepage": "https://github.com/TripSit/Benzo-Calculator#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "ejs": "^2.5.7",

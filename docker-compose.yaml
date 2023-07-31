@@ -1,0 +1,46 @@
+version: '3.9'
+
+name: apps
+
+########################### EXTENSION FIELDS
+# Common environment values
+x-environment: &default-tz-puid-pgid
+  TZ: 'America/Chicago'
+  PUID: '1000'
+  PGID: '1000'
+
+# Keys common to some of the dependent services/apps
+x-common-keys-apps: &common-keys-apps
+  security_opt:
+    - no-new-privileges:true
+  restart: unless-stopped
+
+########################### SERVICES
+services:
+  calculator_benzos:
+    <<: *common-keys-apps
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    container_name: calculator_benzos
+    working_dir: /usr/src/app
+    environment:
+      <<: *default-tz-puid-pgid
+    networks:
+      - calculator_benzos-net
+    labels:
+    - com.centurylinklabs.watchtower.enable=true
+    - traefik.enable=true
+    - traefik.docker.network=calculator_benzos-net
+    - traefik.http.services.benzos-svc.loadbalancer.server.port=4000
+      
+    - traefik.http.routers.benzos-namecheap.rule=Host(`benzos.tripsit.me`)
+    - traefik.http.routers.benzos-namecheap.entrypoints=websecure
+    - traefik.http.routers.benzos-namecheap.tls.certresolver=letsencrypt-legacy
+    - traefik.http.routers.benzos-namecheap.service=benzos-svc
+    - traefik.http.routers.benzos-namecheap.middlewares=default@file
+    command: node app.js
+
+networks:
+  calculator_benzos-net:
+    name: calculator_benzos-net
