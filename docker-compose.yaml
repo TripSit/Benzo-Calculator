@@ -34,11 +34,11 @@ services:
     - traefik.docker.network=calculator_benzos-net
     - traefik.http.services.benzos-svc.loadbalancer.server.port=4000
       
-    - traefik.http.routers.benzos-namecheap.rule=Host(`benzos.tripsit.me`)
-    - traefik.http.routers.benzos-namecheap.entrypoints=websecure
-    - traefik.http.routers.benzos-namecheap.tls.certresolver=letsencrypt-legacy
-    - traefik.http.routers.benzos-namecheap.service=benzos-svc
-    - traefik.http.routers.benzos-namecheap.middlewares=default@file
+    - traefik.http.routers.benzos-cloudflare.rule=Host(`benzos.tripsit.me`)
+    - traefik.http.routers.benzos-cloudflare.entrypoints=websecure
+    - traefik.http.routers.benzos-cloudflare.tls.certresolver=letsencrypt
+    - traefik.http.routers.benzos-cloudflare.service=benzos-svc
+    - traefik.http.routers.benzos-cloudflare.middlewares=default@file
     command: node app.js
 
 networks:
